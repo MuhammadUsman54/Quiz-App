@@ -53,10 +53,10 @@ function checkCorrect(selectedLi, index) {
     var allOptions = quizOptions.getElementsByTagName("li");
 
     if (index === correctIndex) {
-        selectedLi.classList.add("correct");
+        selectedLi.classList+="correct";
         correctCount++;
     } else {
-        selectedLi.classList.add("incorrect");
+        selectedLi.classList+="incorrect";
         incorrectCount++;
     }
 
@@ -98,5 +98,6 @@ function showResult() {
         confirmButtonText: 'Play Again'
     }).then(() => location.reload());
 }
+
 
 renderQuestions();
