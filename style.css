@@ -1,60 +1,87 @@
   body {
-    font-family: Arial, sans-serif;
-    padding: 20px;
+      font-family: Arial, sans-serif;
+      padding: 20px;
   }
 
   .main-container {
-    max-width: 1200px;
-    margin: 100px auto;
+      max-width: 1200px;
+      margin: 100px auto;
   }
+
+
 
   #quizOption li {
-    list-style: none;
-    padding: 12px;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
+      padding: 40px;
+      margin: 30px;
+      background: #f0f0f0;
+      cursor: pointer;
+      border-radius: 5px;
+      list-style: none;
+      height: 30px;
+      ;
   }
 
-  #quizOption li:hover {
-    background-color: #f0f0f0;
+  #quizOption li.active-class {
+      background: #90ee90;
+      font-weight: bold;
   }
 
-  #quizOption li.correct,
-  #quizOption li.incorrect {
-    background-color: #c8f7c5;
-    border-color: #2ecc71;
-  }
-
-  #progressBarContainer {
-    width: 100%;
-    background-color: #eee;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    overflow: hidden;
-    height: 20px;
+  #progressContainer {
+      width: 100%;
+      background: #eee;
+      height: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
   }
 
   #progressBar {
-    height: 100%;
-    width: 0%;
-    background-color: #4caf50;
-    transition: width 0.4s ease;
+      height: 100%;
+      width: 0%;
+      background: green;
+      border-radius: 10px;
+      transition: width 0.3s ease;
   }
 
   #nextBtn {
-    padding: 10px 20px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 20px;
   }
 
   #nextBtn:disabled {
-    background-color: #95a5a6;
-    cursor: not-allowed;
+      background-color: #95a5a6;
+      cursor: not-allowed;
+  }
+
+  .active-class {
+      background-color: #C8F7C5 !important;
+  }
+
+  .non-active {
+      background-color: white;
+  }
+
+  #nextQuestion {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #3498DB;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+  }
+
+
+  #resetQuiz {
+      padding: 10px 20px;
+      background-color: #aa0a0a;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 20px;
   }
