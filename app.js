@@ -12,67 +12,61 @@ const quiz = [
 ];
 
 let currentQuestion = 0;
+let score = 0;
 let correctCount = 0;
 let incorrectCount = 0;
-let answerSelected = false;
 
-const questionElement = document.getElementById("question");
-const quizOptions = document.getElementById("quizOption");
-const nextBtn = document.getElementById("nextBtn");
-const progressBar = document.getElementById("progressBar");
+let scoreElement = document.getElementById("score");
+let progressBar = document.getElementById("progressBar");
+let quizOptions = document.getElementById("quizOption");
+let nextQuestionButton = document.getElementById("nextQuestion");
+
+let currentSelection = null;
 
 function renderQuestions() {
-    if (currentQuestion >= quiz.length) {
-        showResult();
-        return;
-    }
-
-    answerSelected = false;
-    nextBtn.disabled = true;
-
+    let questionElement = document.getElementById("question");
     questionElement.innerHTML = quiz[currentQuestion].question;
+
     quizOptions.innerHTML = '';
-
-
-    for (var i = 0; i < quiz[currentQuestion].options.length; i++) {
-        quizOptions.innerHTML +=
-            '<li onclick="checkCorrect(this,' + i + ')">' +
-            quiz[currentQuestion].options[i] +
-            '</li>';
+    for (let i = 0; i < quiz[currentQuestion].options.length; i++) {
+        quizOptions.innerHTML += `<li onclick="checkCorrect(event)" class="non-active" style="padding:5px; cursor:pointer;">${quiz[currentQuestion].options[i]}</li>`;
     }
-
-
 
     updateProgress();
 }
 
-function checkCorrect(selectedLi, index) {
-    if (answerSelected) return;
-
-    var correctIndex = quiz[currentQuestion].correctAnswer;
-    var allOptions = quizOptions.getElementsByTagName("li");
-
-    if (index === correctIndex) {
-        selectedLi.classList+="correct";
+function goToNext() {
+    if (quiz[currentQuestion].options[quiz[currentQuestion].correctAnswer] === currentSelection.innerHTML) {
+        score += 10;
         correctCount++;
     } else {
-        selectedLi.classList+="incorrect";
         incorrectCount++;
     }
 
-    for (var i = 0; i < allOptions.length; i++) {
-        allOptions[i].style.pointerEvents = "none";
+    scoreElement.innerHTML = score;
+    currentQuestion++;
+
+    if (currentQuestion < quiz.length) {
+        renderQuestions();
+        nextQuestionButton.disabled = true;
+    } else {
+        showResult();
     }
 
-    answerSelected = true;
-    nextBtn.disabled = false;
+    updateProgress();
 }
 
+function checkCorrect(event) {
+    event.target.classList.add("active-class");
 
-function goToNext() {
-    if (!answerSelected) return;
-    currentQuestion++;
-    renderQuestions();
+    for (let i = 0; i < quizOptions.children.length; i++) {
+        if (event.target !== quizOptions.children[i]) {
+            quizOptions.children[i].classList.remove("active-class");
+        }
+    }
+
+    currentSelection = event.target;
+    nextQuestionButton.disabled = false;
 }
 
 function updateProgress() {
@@ -91,12 +85,25 @@ function showResult() {
         html: `
             <p>✅ <b>Correct Answers:</b> ${correctCount}</p>
             <p>❌ <b>Incorrect Answers:</b> ${incorrectCount}</p>
+            <p>🎯 <b>Final Score:</b> ${score}/${totalQuestions * 10}</p>
             <p>📈 <b>Percentage:</b> ${percentage}%</p>
             <p>${percentage >= 50 ? "🎉 <b>Congrats!</b>" : "💪 <b>Keep working hard!</b>"}</p>
         `,
         icon: percentage >= 50 ? 'success' : 'info',
         confirmButtonText: 'Play Again'
     }).then(() => location.reload());
+}
+
+function resetQuiz() {
+    currentQuestion = 0;
+    score = 0;
+    correctCount = 0;
+    incorrectCount = 0;
+    currentSelection = null;
+    scoreElement.innerHTML = score;
+    progressBar.style.width = "0%";
+    nextQuestionButton.disabled = true;
+    renderQuestions();
 }
 
 
