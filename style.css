@@ -40,7 +40,7 @@ body {
 }
 
 .options-list li {
-    background: #f9f9f9;
+    background: #D9FDD3;
     border: 1px solid #ddd;
     padding: 12px;
     border-radius: 8px;
@@ -50,7 +50,7 @@ body {
 }
 
 .options-list li:hover {
-    background: #eef4ff;
+    background: #D9FDD3;
     border-color: #007bff;
 }
 
@@ -200,3 +200,4 @@ body {
         transform: translateY(0);
     }
 }
+
