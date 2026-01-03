@@ -182,27 +182,7 @@ function resetQuiz() {
     renderQuestions();
 }
 
-function startTimer() {
-    timeLeft = 60;
-    timeLeftElement.textContent = formatTime(timeLeft);
-    clearInterval(timerInterval);
-    timerInterval = setInterval(updateTimer, 1000);
-}
 
-function updateTimer() {
-    timeLeft--;
-    if (timeLeft <= 0) {
-        clearInterval(timerInterval);
-        timeLeft = 0;
-        goToNext();
-    }
-    timeLeftElement.textContent = formatTime(timeLeft);
-}
-
-function formatTime(seconds) {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
-}
 
 renderQuestions();
+
